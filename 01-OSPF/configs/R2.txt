@@ -1,1 +1,40 @@
+R1 (OSPF_2) Config  #OSPF_2 Also works as a bridge between OSPF Area 0 and BGP.
 
+
+interface GigabitEthernet0/0
+ description BGP TUNNEL
+ ip address 10.255.255.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.16.1.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 172.16.2.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ redistribute bgp 65002 subnets 
+ network 172.16.1.0 0.0.0.3 area 0
+ network 172.16.2.0 0.0.0.3 area 0
+!
+router bgp 65002            #Not relevant for OSPF configuration. Part of a bigger tolopolgy. 
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 10.255.255.1 remote-as 65001
+ network 10.10.111.0 mask 255.255.255.0
+ network 10.10.112.0 mask 255.255.255.0
+ network 10.10.113.0 mask 255.255.255.0
+ network 10.10.114.0 mask 255.255.255.0
+!
+ip classless
+!
