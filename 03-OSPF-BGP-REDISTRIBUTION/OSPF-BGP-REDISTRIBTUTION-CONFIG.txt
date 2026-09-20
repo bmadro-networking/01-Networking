@@ -1,0 +1,32 @@
+From BGP_1
+
+router ospf 1
+ log-adjacency-changes
+ redistribute bgp 65001 subnets 
+ network 10.0.4.0 0.0.0.3 area 1
+ network 10.0.5.0 0.0.0.3 area 1
+!
+router bgp 65001
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 10.255.255.2 remote-as 65002
+ network 10.10.30.0 mask 255.255.255.0
+ network 10.10.60.0 mask 255.255.255.0
+ network 10.10.10.0 mask 255.255.255.0
+
+From BGP_2
+
+router ospf 1
+ log-adjacency-changes
+ redistribute bgp 65002 subnets 
+ network 172.16.1.0 0.0.0.3 area 0
+ network 172.16.2.0 0.0.0.3 area 0
+!
+router bgp 65002
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 10.255.255.1 remote-as 65001
+ network 10.10.111.0 mask 255.255.255.0
+ network 10.10.112.0 mask 255.255.255.0
+ network 10.10.113.0 mask 255.255.255.0
+ network 10.10.114.0 mask 255.255.255.0
