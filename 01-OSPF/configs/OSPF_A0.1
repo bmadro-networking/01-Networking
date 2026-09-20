@@ -1,0 +1,43 @@
+Config for OSPF Router 1 Area 0 (OSPF_A0.1)
+
+hostname OSPF_A01
+!
+!
+ip cef
+no ipv6 cef
+!
+license udi pid CISCO2911/K9 sn FTX15242VYR-
+!
+
+!
+!
+spanning-tree mode pvst
+!
+interface GigabitEthernet0/0
+ ip address 10.10.127.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 10.0.12.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 10.0.13.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ network 10.0.12.0 0.0.0.3 area 0
+ network 10.0.13.0 0.0.0.3 area 0
+ network 10.10.127.0 0.0.0.3 area 0
+!
+ip classless
+!
