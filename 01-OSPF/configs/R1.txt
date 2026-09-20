@@ -1,1 +1,30 @@
+R1 (OSPF_1) Config
 
+nterface GigabitEthernet0/0
+ ip address 172.16.4.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.16.1.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 172.16.3.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 172.16.1.0 0.0.0.3 area 0
+ network 172.16.3.0 0.0.0.3 area 0
+ network 10.10.113.0 0.0.0.255 area 0
+ network 10.10.114.0 0.0.0.255 area 0
+ network 10.10.111.0 0.0.0.255 area 0
+ network 10.10.112.0 0.0.0.255 area 0
+ network 172.16.4.0 0.0.0.3 area 0
