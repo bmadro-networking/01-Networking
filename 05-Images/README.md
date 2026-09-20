@@ -6,4 +6,4 @@ Normal Pre-fix and accesslists do not work as intended in packet tracer, so I ne
 
 I will likely do the same thing as I did between Area 1 Network A and Area 0 Network B. 
 
-COMMEN ENDS.
+COMMENT ENDS.
