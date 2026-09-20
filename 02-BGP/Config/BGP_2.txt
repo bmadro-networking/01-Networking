@@ -1,1 +1,54 @@
+Config for BGP_2. Part of a OSPF - BGP Redistribution network. Hence the name "OSPF_2".
 
+hostname OSPF_2
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15243QZJ-
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+interface GigabitEthernet0/0
+ description BGP TUNNEL
+ ip address 10.255.255.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.16.1.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 172.16.2.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ redistribute bgp 65002 subnets 
+ network 172.16.1.0 0.0.0.3 area 0
+ network 172.16.2.0 0.0.0.3 area 0
+!
+router bgp 65002
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 10.255.255.1 remote-as 65001
+ network 10.10.111.0 mask 255.255.255.0
+ network 10.10.112.0 mask 255.255.255.0
+ network 10.10.113.0 mask 255.255.255.0
+ network 10.10.114.0 mask 255.255.255.0
+!
+ip classless
+!
