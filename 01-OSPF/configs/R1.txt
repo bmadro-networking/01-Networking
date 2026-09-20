@@ -1,6 +1,6 @@
 R1 (OSPF_1) Config
 
-nterface GigabitEthernet0/0
+interface GigabitEthernet0/0
  ip address 172.16.4.1 255.255.255.252
  duplex auto
  speed auto
