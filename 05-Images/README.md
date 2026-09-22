@@ -1,9 +1,7 @@
 Everything I have uploaded so far is part of the topology you can find in this folder.
 
-As you can see I have a link that is in STATE:SHUT, a loop occurred in this place between BGP and OSPF, which I am working on fixing.
+Normal Pre-fix and accesslists do not work as intended in packet tracer, so I have to allow the VLANs of my choosing free access thru BGP.
 
-Normal Pre-fix and accesslists do not work as intended in packet tracer, so I need to find a better way to fix this. 
-
-I will likely do the same thing as I did between Area 1 Network A and Area 0 Network B. 
+Whats not seen in this topology is that VLAN 10 is the only vlan allowed from the upper part of the topology, through BGP to reach VLANs 30, and vlan 114 (Leadership).
 
 COMMENT ENDS.
