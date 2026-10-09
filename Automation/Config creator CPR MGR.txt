@@ -1,0 +1,35 @@
+import ipaddress
+from rich import print #Kan fjernes om ikke installert på tak.
+import base64
+
+message = base64.b64decode(
+    "SElMU0VOIDFZIE1BRFJP=="
+    ).decode()
+
+# Starting IP addresse for COM10.
+starting_ip = input("Enter starting IPv4 address: ")
+
+try:
+    ip = ipaddress.ip_address(starting_ip)
+
+    print("\n[bold cyan]CPR Configuration[/bold cyan]")
+    print("-" * 52)
+
+    # COM 10 / 11
+    print(f"{ip}  | MRR  | COM10 | TCP 10001 | BAUD 115200")
+    print(f"{ip}  | MRR  | COM11 | TCP 10002 | BAUD 115200")
+
+    # COM 20 / 21
+    ip_20 = ip + 1
+    print(f"{ip_20}  | HF   | COM20 | TCP 10001 | BAUD 115200")
+    print(f"{ip_20}  | HF   | COM21 | TCP 10002 | BAUD 115200")
+
+    # COM 30 / 31
+    ip_30 = ip + 2
+    print(f"{ip_30}  | GPS  | COM30 | TCP 10001 | BAUD 9600")
+    print(f"{ip_30}  | GPS  | COM31 | TCP 10002 | BAUD 9600")
+
+    print("-" *19 + message + "-"*18)
+
+except ValueError:
+    print("Invalid IPv4 address.")
